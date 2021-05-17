@@ -8,6 +8,7 @@ import torch.optim
 import torchvision.utils as vutils
 from torch.utils.data import DataLoader
 
+from data.mars_dataset import MarsSimDataset
 from data.CRN_dataset import CRNShapeNet
 from data.ply_dataset import PlyDataset
 
@@ -51,8 +52,10 @@ class Trainer(object):
         
         if self.args.dataset in ['MatterPort','ScanNet','KITTI','PartNet']:
             dataset = PlyDataset(self.args)
-        else: 
+        elif self.args.dataset == 'CRN': 
             dataset = CRNShapeNet(self.args)
+        elif self.args.dataset == 'MarsSim':
+            dataset = MarsSimDataset(self.args)
         
         sampler = DistributedSampler(dataset) if self.args.dist else None
 
