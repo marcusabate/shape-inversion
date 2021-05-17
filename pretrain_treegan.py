@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+from data.mars_dataset import MarsSimDataset
 from data.CRN_dataset import CRNShapeNet
 from model.treegan_network import Generator, Discriminator
 from model.gradient_penalty import GradientPenalty
@@ -22,7 +23,7 @@ class TreeGAN():
         self.args = args
         
         ### dataset
-        self.data = CRNShapeNet(args)
+        self.data = MarsSimDataset(args)
         self.dataLoader = torch.utils.data.DataLoader(self.data, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=16)
         print("Training Dataset : {} prepared.".format(len(self.data)))
         
@@ -171,7 +172,7 @@ class TreeGAN():
             ### call abstracted eval, which includes FPD
             if self.args.eval_every_n_epoch > 0:
                 if epoch % self.args.eval_every_n_epoch == 0 :
-                    checkpoint_eval(self.G, self.args.device, n_samples=5000, batch_size=100,conditional=False, ratio='even', FPD_path=self.args.FPD_path,class_choices=self.args.class_choice)
+                    checkpoint_eval(self.G, self.args.device, n_samples=5000, batch_size=self.args.batch_size,conditional=False, ratio='even', FPD_path=self.args.FPD_path,class_choices=self.args.class_choice)
 
             # ---------------------- Save checkpoint --------------------- #
             if epoch % self.args.save_every_n_epoch == 0 and not save_ckpt == None:
