@@ -2,12 +2,12 @@
 import os
 import torch
 import numpy as np
-from external.ChamferDistancePytorch.chamfer_python import distChamfer
+from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer
 import glob
 from metrics import *
-from loss import *
+from shape_inversion.loss import *
 import h5py
-from utils.common_utils import *
+from shape_inversion.utils.common_utils import *
 from arguments import Arguments
 
 def compute_cd_small_batch(gt, output,batch_size=50):

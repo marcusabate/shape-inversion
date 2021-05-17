@@ -10,8 +10,8 @@ from tqdm import tqdm
 import pickle
 import h5py
 import glob
-from utils.io import read_ply_xyz, read_ply_from_file_list
-from utils.pc_transform import swap_axis
+from shape_inversion.utils.io import read_ply_xyz, read_ply_from_file_list
+from shape_inversion.utils.pc_transform import swap_axis
 
 
 def get_stems_from_pickle(test_split_pickle_path):

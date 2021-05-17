@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 # from layers.gcn import TreeGCN
-from model.gcn import TreeGCN
+from shape_inversion.model.gcn import TreeGCN
 
 from math import ceil
 

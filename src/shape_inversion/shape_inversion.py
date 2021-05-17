@@ -9,13 +9,13 @@ import torch.distributed as dist
 import torch.nn.functional as F
 import torchvision
 from torch.autograd import Variable
-from model.treegan_network import Generator, Discriminator
+from shape_inversion.model.treegan_network import Generator, Discriminator
 
-from utils.common_utils import *
-from loss import *
-from evaluation.pointnet import *
+from shape_inversion.utils.common_utils import *
+from shape_inversion.loss import *
+from shape_inversion.evaluation.pointnet import *
 import time
-from external.ChamferDistancePytorch.chamfer_python import distChamfer, distChamfer_raw
+from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer, distChamfer_raw
 
 class ShapeInversion(object):
 

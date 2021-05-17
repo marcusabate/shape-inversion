@@ -4,13 +4,13 @@ from numpy.linalg import norm
 from scipy.stats import entropy
 import torch
 import math
-from loss import *
+from shape_inversion.loss import *
 
 import sys
 
-from external.ChamferDistancePytorch.chamfer_python import distChamfer
+from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer
 try: 
-    from external.emd.emd_module import emdModule
+    from shape_inversion.external.emd.emd_module import emdModule
 except:
     print("NOTE: EMD not installed yet")
 

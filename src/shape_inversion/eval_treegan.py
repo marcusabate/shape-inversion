@@ -2,15 +2,15 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from data.CRN_dataset import CRNShapeNet
-from model.treegan_network import Generator, Discriminator
-from model.gradient_penalty import GradientPenalty
-from evaluation.FPD import calculate_fpd, calculate_activation_statistics
+from shape_inversion.data.CRN_dataset import CRNShapeNet
+from shape_inversion.model.treegan_network import Generator, Discriminator
+from shape_inversion.model.gradient_penalty import GradientPenalty
+from shape_inversion.evaluation.FPD import calculate_fpd, calculate_activation_statistics
 
 from metrics import *
-from loss import *
+from shape_inversion.loss import *
 
-from evaluation.pointnet import PointNetCls
+from shape_inversion.evaluation.pointnet import PointNetCls
 from math import ceil
 import argparse
 import time
@@ -19,7 +19,7 @@ import time
 import os.path as osp
 import os
 import copy
-from utils.common_utils import *
+from shape_inversion.utils.common_utils import *
 from arguments import Arguments
 
 def save_pcs_to_txt(save_dir, fake_pcs):

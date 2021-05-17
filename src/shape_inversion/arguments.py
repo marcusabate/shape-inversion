@@ -5,7 +5,7 @@ import torch
 import torchvision.transforms as transforms
 from PIL import Image
 
-from utils.common_utils import *
+from shape_inversion.utils.common_utils import *
 
 class Arguments:
     def __init__(self, stage='pretrain'):
@@ -26,7 +26,7 @@ class Arguments:
         ### data related
         self._parser.add_argument('--class_choice', type=str, default='chair', help='plane|cabinet|car|chair|lamp|couch|table|watercraft|martian_terrain')
         self._parser.add_argument('--dataset', type=str, default='CRN', help='CRN|MatterPort|ScanNet|KITTI|PartNet|PFNet|MarsSim')
-        self._parser.add_argument('--dataset_path', type=str, required=True, help='Dataset path is required')
+        self._parser.add_argument('--dataset_path', type=str, required=False, help='Dataset path is required')
         self._parser.add_argument('--split', type=str, default='test', help='NOTE: train if pretrain and generate_fpd_stats; test otherwise')
         
         ### TreeGAN architecture related
@@ -44,7 +44,7 @@ class Arguments:
     def add_pretrain_args(self):
         ### general training related
         self._parser.add_argument('--batch_size', type=int, default=128, help='128 for cabinet, lamp, sofa, and boat due to smaller amounts; you can set up to 512 for plane, car, chair, and table')
-        self._parser.add_argument('--epochs', type=int, default=2000, help='Integer value for epochs.')
+        self._parser.add_argument('--epochs', type=int, default=1000, help='Integer value for epochs.')
         self._parser.add_argument('--lr', type=float, default=1e-4, help='Float value for learning rate.')
         self._parser.add_argument('--lambdaGP', type=int, default=10, help='Lambda for GP term.')
         self._parser.add_argument('--D_iter', type=int, default=5, help='Number of iterations for discriminator.')
@@ -71,8 +71,8 @@ class Arguments:
         ### ohters
         self._parser.add_argument('--ckpt_path', type=str, default='./pretrain_checkpoints/chair', help='Checkpoint path.')
         self._parser.add_argument('--ckpt_save', type=str, default='tree_ckpt_', help='Checkpoint name to save.')
-        self._parser.add_argument('--eval_every_n_epoch', type=int, default=10, help='0 means never eval')
-        self._parser.add_argument('--save_every_n_epoch', type=int, default=10, help='save models every n epochs')
+        self._parser.add_argument('--eval_every_n_epoch', type=int, default=0, help='0 means never eval')
+        self._parser.add_argument('--save_every_n_epoch', type=int, default=50, help='save models every n epochs')
      
     def add_inversion_args(self):
         
@@ -140,10 +140,3 @@ class Arguments:
     
     def parser(self):
         return self._parser
-    
-
-
-    
-   
-
-

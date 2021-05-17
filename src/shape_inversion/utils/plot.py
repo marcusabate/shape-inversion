@@ -6,7 +6,7 @@ import numpy as np
 import os
 import sys
 sys.path.append(os.path.abspath('..'))
-from utils.io import read_txt_xyz
+from shape_inversion.utils.io import read_txt_xyz
 
 def draw_any_set(flag_list, pcd_list, output_dir, output_stem, layout=None,apply_ax_limit=True,ax_limit=0.5,size=1,colors=None,axis_off=False,format='.png',figuresize=None,wspace=None,hspace=None,set_title=True,show=False):
     """

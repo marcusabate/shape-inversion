@@ -7,7 +7,7 @@ import torch
 from scipy.linalg import sqrtm
 # from scipy.misc import imread
 from torch.nn.functional import adaptive_avg_pool2d
-from evaluation.pointnet import PointNetCls
+from shape_inversion.evaluation.pointnet import PointNetCls
 
 try:
     from tqdm import tqdm

@@ -1,8 +1,8 @@
 import torch.utils.data as data
 import os.path
 import glob
-from utils.io import read_ply_xyz
-# from utils.pc_transform import swap_axis
+from shape_inversion.utils.io import read_ply_xyz
+# from shape_inversion.utils.pc_transform import swap_axis
 
 class MarsSimDataset(data.Dataset):
     def __init__(self, args):

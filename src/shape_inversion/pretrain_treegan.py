@@ -2,17 +2,17 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from data.mars_dataset import MarsSimDataset
-from data.CRN_dataset import CRNShapeNet
-from model.treegan_network import Generator, Discriminator
-from model.gradient_penalty import GradientPenalty
-from evaluation.FPD import calculate_fpd
+from shape_inversion.data.mars_dataset import MarsSimDataset
+from shape_inversion.data.CRN_dataset import CRNShapeNet
+from shape_inversion.model.treegan_network import Generator, Discriminator
+from shape_inversion.model.gradient_penalty import GradientPenalty
+from shape_inversion.evaluation.FPD import calculate_fpd
 
 from arguments import Arguments
 
 import time
 import numpy as np
-from loss import *
+from shape_inversion.loss import *
 from metrics import *
 import os
 import os.path as osp

@@ -26,7 +26,7 @@ class CRNShapeNet(data.Dataset):
         self.labels = data['labels'][()]
         
         np.random.seed(0)
-        cat_ordered_list = ['plane','cabinet','car','chair','lamp','couch','table','watercraft']
+        cat_ordered_list = ['plane','cabinet','car','chair','lamp','couch','table','watercraft','martian_terrain']
 
         cat_id = cat_ordered_list.index(self.class_choice.lower())
         self.index_list = np.array([i for (i, j) in enumerate(self.labels) if j == cat_id ])                      

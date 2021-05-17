@@ -8,22 +8,23 @@ import torch.optim
 import torchvision.utils as vutils
 from torch.utils.data import DataLoader
 
-from data.CRN_dataset import CRNShapeNet
-from data.ply_dataset import PlyDataset
+from shape_inversion.data.mars_dataset import MarsSimDataset
+from shape_inversion.data.CRN_dataset import CRNShapeNet
+from shape_inversion.data.ply_dataset import PlyDataset
 
 
-from arguments import Arguments
+from shape_inversion.arguments import Arguments
 
-from utils.pc_transform import voxelize
-from utils.plot import draw_any_set
-from utils.common_utils import *
-from utils.inversion_dist import *
-from loss import *
+from shape_inversion.utils.pc_transform import voxelize
+from shape_inversion.utils.plot import draw_any_set
+from shape_inversion.utils.common_utils import *
+from shape_inversion.utils.inversion_dist import *
+from shape_inversion.loss import *
 
-from shape_inversion import ShapeInversion
+from shape_inversion.shape_inversion import ShapeInversion
 
-from model.treegan_network import Generator, Discriminator
-from external.ChamferDistancePytorch.chamfer_python import distChamfer, distChamfer_raw
+from shape_inversion.model.treegan_network import Generator, Discriminator
+from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer, distChamfer_raw
 
 import random
 
@@ -51,8 +52,12 @@ class Trainer(object):
         
         if self.args.dataset in ['MatterPort','ScanNet','KITTI','PartNet']:
             dataset = PlyDataset(self.args)
-        else: 
+        elif self.args.dataset == 'CRN': 
             dataset = CRNShapeNet(self.args)
+        elif self.args.dataset == 'MarsSim':
+            dataset = MarsSimDataset(self.args)
+        else:
+            raise Exception("Dataset type isn't recognized")
         
         sampler = DistributedSampler(dataset) if self.args.dist else None
 
