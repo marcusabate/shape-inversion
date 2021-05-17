@@ -21,7 +21,7 @@ from shape_inversion.utils.common_utils import *
 from shape_inversion.utils.inversion_dist import *
 from shape_inversion.loss import *
 
-from shape_inversion.shape_inversion import ShapeInversion
+from shape_inversion.inversion import ShapeInversion
 
 from shape_inversion.model.treegan_network import Generator, Discriminator
 from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer, distChamfer_raw
