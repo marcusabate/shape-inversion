@@ -1,3 +1,5 @@
+import argparse
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -134,7 +136,12 @@ def test(args, mode='FPD', verbose=True):
 
 
 if __name__ == '__main__':
-    args = Arguments(stage='eval_treegan').parser().parse_args()
+    arg_parser = argparse.ArgumentParser(
+        description='Arguments for pretrain|inversion|eval_treegan|eval_completion.')
+    arg_parser.add_argument('--params_filename', required=True, help='Path to params yaml file')
+    params_filename = arg_parser.parse_args().params_filename
+
+    args = Arguments(params_filename, stage='eval_treegan')
     args.device = torch.device('cuda')
 
     assert args.eval_treegan_mode in ["MMD", "FPD", "save", "generate_fpd_stats"]
@@ -142,4 +149,4 @@ if __name__ == '__main__':
     if args.eval_treegan_mode == "generate_fpd_stats":
         script_create_fpd_stats(args)
     else:
-        test(args,mode=args.eval_treegan_mode)    
+        test(args,mode=args.eval_treegan_mode)

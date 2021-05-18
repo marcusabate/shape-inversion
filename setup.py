@@ -15,5 +15,6 @@ setup(
                       'ninja==1.10.0.post2',
                       'matplotlib==3.4.2',
                       'scipy==1.6.3',
-                      'tqdm==4.60.0',],
+                      'tqdm==4.60.0',
+                      'ruamel.yaml==0.17.4'],
 )

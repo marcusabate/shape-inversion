@@ -1,5 +1,6 @@
 
 import os
+import argparse
 import torch
 import numpy as np
 from shape_inversion.external.ChamferDistancePytorch.chamfer_python import distChamfer
@@ -196,12 +197,14 @@ def eval_completion_without_gt(input_dir):
     print('uhd:',uhd)
 
 if __name__ == '__main__':
+    arg_parser = argparse.ArgumentParser(
+        description='Arguments for pretrain|inversion|eval_treegan|eval_completion.')
+    arg_parser.add_argument('--params_filename', required=True, help='Path to params yaml file')
+    params_filename = arg_parser.parse_args().params_filename
 
-    args = Arguments(stage='eval_completion').parser().parse_args()
+    args = Arguments(params_filename, stage='eval_completion')
+
     if args.eval_with_GT:
         eval_completion_with_gt(args.saved_results_path)
     else:
         eval_completion_without_gt(args.saved_results_path)
-
-    
-    

@@ -1,3 +1,5 @@
+import argparse
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -191,8 +193,12 @@ class TreeGAN():
                                
 
 if __name__ == '__main__':
+    arg_parser = argparse.ArgumentParser(
+        description='Arguments for pretrain|inversion|eval_treegan|eval_completion.')
+    arg_parser.add_argument('--params_filename', required=True, help='Path to params yaml file')
+    params_filename = arg_parser.parse_args().params_filename
 
-    args = Arguments(stage='pretrain').parser().parse_args()
+    args = Arguments(params_filename, stage='pretrain')
     args.device = torch.device('cuda:'+str(args.gpu) if torch.cuda.is_available() else 'cpu')
     torch.cuda.set_device(args.device)
 

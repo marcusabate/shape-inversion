@@ -1,6 +1,7 @@
 import os
 import time
 from collections import OrderedDict
+import argparse
 
 import torch
 import torch.distributed as dist
@@ -11,7 +12,6 @@ from torch.utils.data import DataLoader
 from shape_inversion.data.mars_dataset import MarsSimDataset
 from shape_inversion.data.CRN_dataset import CRNShapeNet
 from shape_inversion.data.ply_dataset import PlyDataset
-
 
 from shape_inversion.arguments import Arguments
 
@@ -289,7 +289,12 @@ class Trainer(object):
                 tic = time.time()          
 
 if __name__ == "__main__":
-    args = Arguments(stage='inversion').parser().parse_args()
+    arg_parser = argparse.ArgumentParser(
+        description='Arguments for pretrain|inversion|eval_treegan|eval_completion.')
+    arg_parser.add_argument('--params_filename', required=True, help='Path to params yaml file')
+    params_filename = arg_parser.parse_args().params_filename
+
+    args = Arguments(params_filename, stage='inversion')
     args.device = torch.device('cuda:'+str(args.gpu) if torch.cuda.is_available() else 'cpu')
     torch.cuda.set_device(args.device)
     
@@ -303,5 +308,3 @@ if __name__ == "__main__":
 
     trainer = Trainer(args)
     trainer.run()
-    
-    

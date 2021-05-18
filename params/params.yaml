@@ -1,0 +1,86 @@
+# Common args
+class_choice : 'martian_terrain'
+dataset : 'MarsSim'
+dataset_path : '../../../../mars_printer/data/mars_sim/0517221_0010_train_uniform_input'
+split : test
+DEGREE : [1, 2, 2, 2, 2, 2, 64]
+G_FEAT : [96, 256, 256, 256, 128, 128, 128, 3]
+D_FEAT : [3, 64, 128, 256, 256, 512]
+support : 10
+loop_non_linear : False
+FPD_path : ''
+gpu : 0
+ckpt_load : '../../pretrained_models/mars.pt'
+
+# Inversion args
+w_nll : 0.001
+p2f_chamfer : False
+p2f_feature : False
+w_D_loss : [0.1]
+directed_hausdorff : False
+w_directed_hausdorff_loss : 1
+mask_type : k_mask
+k_mask_k : [5, 5, 5, 5]
+voxel_bins : 32
+surrounding : 0
+tau_mask_dist : [0.01, 0.01, 0.01, 0.01]
+hole_radius : 0.35
+hole_k : 500
+hole_n : 1
+masking_option : element_product
+inversion_mode : completion
+n_z_candidates : 50
+n_outputs : 10
+random_G : False
+select_num : 500
+sample_std : 1.0
+iterations : [200, 200, 200, 200]
+G_lrs : [2e-07, 1e-06, 1e-06, 2e-07]
+z_lrs : [0.01, 0.0001, 0.0001, 1e-06]
+warm_up : 0
+update_G_stages : [1, 1, 1, 1]
+progressive_finetune : False
+init_by_p2f_chamfer : False
+early_stopping : False
+stop_cd : 0.0005
+target_downsample_method : 'fps'
+target_downsample_size : 3000
+save_inversion_path : '../../saved_results/martian_terrain_test/'
+dist : False
+port : 12345
+visualize : False
+
+# Pretrain args
+batch_size : 128
+epochs : 1000
+lr : 0.0001
+lambdaGP : 10
+D_iter : 5
+w_train_ls : [1]
+knn_loss : False
+knn_k : 30
+knn_n_seeds : 100
+knn_scalar : 0.2
+krepul_loss : False
+krepul_k : 10
+krepul_n_seeds : 20
+krepul_scalar : 1
+krepul_h : 0.01
+expansion_penality : False
+expan_primitive_size : 64
+expan_alpha : 1.5
+expan_scalar : 0.1
+ckpt_path : ''
+ckpt_save : tree_ckpt_
+eval_every_n_epoch : 0
+save_every_n_epoch : 50
+
+# Eval completion args
+eval_with_GT : 0
+saved_results_path : True
+
+# Eval treegan args
+eval_treegan_mode : FPD
+save_sample_path : ''
+model_pathname : True
+n_samples : 5000
