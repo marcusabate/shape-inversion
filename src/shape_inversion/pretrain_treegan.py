@@ -174,7 +174,7 @@ class TreeGAN():
             ### call abstracted eval, which includes FPD
             if self.args.eval_every_n_epoch > 0:
                 if epoch % self.args.eval_every_n_epoch == 0 :
-                    checkpoint_eval(self.G, self.args.device, n_samples=5000, batch_size=self.args.batch_size,conditional=False, ratio='even', FPD_path=self.args.FPD_path,class_choices=self.args.class_choice)
+                    checkpoint_eval(self.G, self.args.device, n_samples=5000, batch_size=self.args.batch_size, conditional=False, ratio='even', FPD_path=self.args.FPD_path, class_choices=self.args.class_choice)
 
             # ---------------------- Save checkpoint --------------------- #
             if epoch % self.args.save_every_n_epoch == 0 and not save_ckpt == None:

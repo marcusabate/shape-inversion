@@ -74,4 +74,26 @@ class PlyDataset(data.Dataset):
             return (gt_pcd, input_pcd, stem)
     
     def __len__(self):
-        return len(self.input_ls)  
+        return len(self.input_ls)
+
+
+class SinglePlyDataset(data.Dataset):
+    """
+    dataset that is composed of a single ply file, without ground truth.
+    meant for fast completion testing.
+    """
+    def __init__(self, args):
+        self.dataset = args.dataset
+        self.dataset_path = args.dataset_path
+        
+        if self.dataset == 'SinglePly':
+            self.stems = [0]
+            self.input_ls = [read_ply_xyz(self.dataset_path)]
+        else:
+            raise NotImplementedError
+    
+    def __getitem__(self, index):
+        return (self.input_ls[index], self.stems[index])
+    
+    def __len__(self):
+        return len(self.input_ls)  # should always be 1

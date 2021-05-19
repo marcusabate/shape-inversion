@@ -1,7 +1,7 @@
 # Common args
 class_choice : 'martian_terrain'
 dataset : 'MarsSim'
-dataset_path : '../../../../mars_printer/data/mars_sim/0517221_0010_train_uniform_input'
+dataset_path : ''
 split : test
 DEGREE : [1, 2, 2, 2, 2, 2, 64]
 G_FEAT : [96, 256, 256, 256, 128, 128, 128, 3]
@@ -10,7 +10,7 @@ support : 10
 loop_non_linear : False
 FPD_path : ''
 gpu : 0
-ckpt_load : '../../pretrained_models/mars.pt'
+ckpt_load : '../../pretrained_models/mars2.pt'
 
 # Inversion args
 w_nll : 0.001
@@ -45,7 +45,7 @@ early_stopping : False
 stop_cd : 0.0005
 target_downsample_method : 'fps'
 target_downsample_size : 3000
-save_inversion_path : '../../saved_results/martian_terrain_test/'
+save_inversion_path : ''
 dist : False
 port : 12345
 visualize : False
@@ -77,10 +77,10 @@ save_every_n_epoch : 50
 
 # Eval completion args
 eval_with_GT : 0
-saved_results_path : True
+saved_results_path : ''
 
 # Eval treegan args
 eval_treegan_mode : FPD
 save_sample_path : ''
-model_pathname : True
+model_pathname : ''
 n_samples : 5000

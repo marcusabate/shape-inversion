@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 
 from shape_inversion.data.mars_dataset import MarsSimDataset
 from shape_inversion.data.CRN_dataset import CRNShapeNet
-from shape_inversion.data.ply_dataset import PlyDataset
+from shape_inversion.data.ply_dataset import PlyDataset, SinglePlyDataset
 
 from shape_inversion.arguments import Arguments
 
@@ -52,6 +52,8 @@ class Trainer(object):
         
         if self.args.dataset in ['MatterPort','ScanNet','KITTI','PartNet']:
             dataset = PlyDataset(self.args)
+        elif self.args.dataset == 'SinglePly':
+            dataset = SinglePlyDataset(self.args)
         elif self.args.dataset == 'CRN': 
             dataset = CRNShapeNet(self.args)
         elif self.args.dataset == 'MarsSim':
@@ -103,7 +105,7 @@ class Trainer(object):
     def train(self):
         for i, data in enumerate(self.dataloader):
             tic = time.time()
-            if self.args.dataset in ['MatterPort','ScanNet','KITTI']:
+            if self.args.dataset in ['MatterPort','ScanNet','KITTI','SinglePly']:
                 # without gt
                 partial, index = data
                 gt = None
@@ -140,7 +142,7 @@ class Trainer(object):
             self.model.run()
             toc = time.time()
             if self.rank == 0:
-                print(i ,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
+                print(i + 1 ,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
             
             if self.args.visualize:
                 pcd_list = self.model.checkpoint_pcd
@@ -159,7 +161,7 @@ class Trainer(object):
         for i, data in enumerate(self.dataloader):
             tic = time.time()
             ### get data
-            if self.args.dataset in ['MatterPort','ScanNet','KITTI']:
+            if self.args.dataset in ['MatterPort','ScanNet','KITTI','SinglePly']:
                 # without gt
                 partial, index = data
                 gt = None
@@ -225,7 +227,7 @@ class Trainer(object):
                 draw_any_set(flag_ls, pcd_ls, output_dir, output_stem, layout=layout)
                 if self.rank == 0:
                     toc = time.time()
-                    print(i ,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
+                    print(i + 1 ,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
                     tic = time.time()
 
     def train_morphing(self):
@@ -285,7 +287,7 @@ class Trainer(object):
             
             if self.rank == 0:
                 toc = time.time()
-                print(i ,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
+                print(i + 1,'out of',len(self.dataloader),'done in ',int(toc-tic),'s')
                 tic = time.time()          
 
 if __name__ == "__main__":
